@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        a:hover {
+            background: #0056b3;
+        }
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+        td a {
+            color: #dc3545;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        td a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Product List</h1>
+    <a href="/products/new">Add New Product</a>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.quantity}"></td>
+            <td>
+                <a th:href="@{/products/edit/{id}(id=${product.id})}">Edit</a> |
+                <a th:href="@{/products/delete/{id}(id=${product.id})}" style="color: red;">Delete</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
